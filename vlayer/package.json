@@ -6,7 +6,7 @@
     "lint:solidity": "solhint '../src/**/*.sol'",
     "prove:testnet": "VLAYER_ENV=testnet bun run prove.ts",
     "prove:dev": "VLAYER_ENV=dev bun run prove.ts",
-    "mail": "ENV=dev bun run mail.ts"
+    "mail": "VLAYER_ENV=dev bun run mail.ts"
   },
   "dependencies": {
     "@noble/hashes": "^1.4.0",

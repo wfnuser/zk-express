@@ -20,19 +20,25 @@ def fetch_latest_email(username, password):
         print(pop_conn.list())
         latest_msg_num = len(pop_conn.list()[1])
         if latest_msg_num > 0:
-            eml_path = os.path.join(mails_dir, f'email_{latest_msg_num}.eml')
-
+            eml_path = os.path.join(mails_dir, f'{latest_msg_num}.eml')
             # Only download if the email hasn't been downloaded before
-            if not os.path.exists(eml_path):
-                response, lines, octets = pop_conn.retr(latest_msg_num)
-                raw_message = b"\n".join(lines)
-
-                # Save as .eml file
-                with open(eml_path, 'wb') as f:
-                    f.write(raw_message)
-                print(f"Downloaded new email: email_{latest_msg_num}.eml")
-            else:
-                print(f"Email_{latest_msg_num}.eml already exists")
+            # if not os.path.exists(eml_path):
+            response, lines, octets = pop_conn.retr(latest_msg_num)
+            # get date from the email
+            # Date: Sat, 16 Nov 2024 12:01:38 -0800
+            for line in lines:
+                if line.startswith(b"Date:"):
+                    date = line.split(b"-")[0].split(b":", 1)[1].strip().decode("utf-8")
+                    break
+            raw_message = b"\n".join(lines)
+            # date to timestamp
+            timestamp = int(time.mktime(time.strptime(date, "%a, %d %b %Y %H:%M:%S")))
+            # Save as .eml file
+            with open(eml_path, 'wb') as f:
+                f.write(raw_message)
+            print(f"Downloaded new email: {timestamp}.eml")
+            # else:
+            #     print(f"{latest_msg_num}.eml already exists")
         else:
             print("No emails found")
 
