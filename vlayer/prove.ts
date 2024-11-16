@@ -9,7 +9,9 @@ import {
 import proverSpec from "../out/EmailProver.sol/EmailProver";
 import verifierSpec from "../out/EmailProofVerifier.sol/EmailProofVerifier";
 
-const mimeEmail = fs.readFileSync("./testdata/credit-email.eml").toString();
+const mimeEmail = fs
+  .readFileSync("./testdata/github-open-issue.eml")
+  .toString();
 const unverifiedEmail = await preverifyEmail(mimeEmail);
 
 const { prover, verifier } = await deployVlayerContracts({
@@ -40,38 +42,14 @@ const hash = await vlayer.prove({
 console.log("Proof hash:", hash);
 const result = await vlayer.waitForProvingResult(hash);
 console.log("Proof:", result[0]);
-console.log("Email:", result[1]);
-console.log("Credit:", result[2]);
-console.log("BankName:", result[3]);
+console.log("Repo:", result[1]);
+console.log("Issue Number:", result[2]);
 console.log("Verifying...");
-
-// use ethClient to get event from prover
-////////////////////////////////////////////////////////////
-// while (true) {
-//   const logs = await ethClient.getContractEvents({
-//     address: prover,
-//     abi: proverSpec.abi,
-//     eventName: "LogString",
-//     fromBlock: startBlock,
-//     toBlock: "latest",
-//   });
-
-//   if (logs.length > 0) {
-//     logs.forEach((log) => {
-//       console.log(`${log.args.label}: ${log.args.value}`);
-//     });
-//     break; // 如果找到日志就退出循环
-//   }
-
-//   await new Promise((resolve) => setTimeout(resolve, 1000)); // 等待1秒
-// }
-////////////////////////////////////////////////////////////
 
 const txHash = await ethClient.writeContract({
   address: verifier,
   abi: verifierSpec.abi,
   functionName: "verify",
-  // args: [result[0], "qinghao@ethglobal.com", 80n, "ETH Bank"],
   args: result,
   chain,
   account: account,
@@ -84,13 +62,13 @@ await ethClient.waitForTransactionReceipt({
   retryDelay: 1000,
 });
 
-const credits = await ethClient.readContract({
+const repoIssues = await ethClient.readContract({
   address: verifier,
   abi: verifierSpec.abi,
-  functionName: "getUserCredits",
-  args: ["qinghao@ethglobal.com"],
+  functionName: "getRepoIssues",
+  args: ["YoubetDao-Test/test-tutorial-scroll-1"],
 });
 
-console.log("Get Credit From Verifier:", credits);
+console.log("Get Repo Issue Number From Verifier:", repoIssues);
 
 console.log("Verified!");

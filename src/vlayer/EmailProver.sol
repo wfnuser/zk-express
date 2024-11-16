@@ -37,21 +37,23 @@ contract EmailProver is Prover {
 
     function main(
         UnverifiedEmail calldata unverifiedEmail
-    ) public returns (Proof memory, string memory, uint256, string memory) {
+    ) public returns (Proof memory, string memory, uint256) {
         VerifiedEmail memory email = unverifiedEmail.verify();
 
-        // 从 subject 中捕获信息
+        // capture subject to get repo name and issue number
+        // for example:
+        // [YoubetDao-Test/test-tutorial-scroll-1] test-issue-for-zk-email-2
+        // (Issue #41)
         string[] memory captures = email.subject.capture(
-            "^Hi, [^(]+ \\(([^)]+)\\). Your Credit is ([0-9]+) in ([^!]+)!$"
+            "^\\[(.*?)\\].*\\(Issue #([0-9]+)\\)$"
         );
 
-        require(captures.length == 4, "Invalid subject format");
+        require(captures.length == 3, "Invalid subject format");
 
         return (
             proof(),
-            captures[1], // email
-            _parseUint(captures[2]), // credit
-            captures[3] // bank name
+            captures[1], // repo name
+            _parseUint(captures[2]) // issue number
         );
     }
 }
