@@ -1,25 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useContractRead } from "wagmi";
 import { VERIFIER_ABI, VERIFIER_ADDRESS } from "../config/constants";
 
 export default function RepoBattle() {
-  const [repo1] = useState("YoubetDao/repo-1");
-  const [repo2] = useState("YoubetDao/repo-2");
+  const [repo1] = useState("YoubetDao-Test/test-zk-git");
+  const [repo2] = useState("YoubetDao-Test/test-optimistic-tutorial");
 
-  const { data: issueCount1 } = useContractRead({
+  const { data: issueCount1, refetch: refetchIssues1 } = useContractRead({
     address: VERIFIER_ADDRESS,
     abi: VERIFIER_ABI,
     functionName: "getRepoIssues",
     args: [repo1],
   });
 
-  const { data: issueCount2 } = useContractRead({
+  const { data: issueCount2, refetch: refetchIssues2 } = useContractRead({
     address: VERIFIER_ADDRESS,
     abi: VERIFIER_ABI,
     functionName: "getRepoIssues",
     args: [repo2],
   });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetchIssues1();
+      refetchIssues2();
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [refetchIssues1, refetchIssues2]);
 
   const count1 = Number(issueCount1 ?? 0);
   const count2 = Number(issueCount2 ?? 0);
