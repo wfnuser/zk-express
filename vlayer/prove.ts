@@ -17,6 +17,9 @@ const { prover, verifier } = await deployVlayerContracts({
   verifierSpec,
 });
 
+console.log("Prover:", prover);
+console.log("Verifier:", verifier);
+
 const config = getConfig();
 const { chain, ethClient, account, proverUrl, confirmations } =
   await createContext(config);
