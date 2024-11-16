@@ -23,21 +23,35 @@ contract EmailProver is Prover {
 
     event LogString(string label, string value);
 
+    function _parseUint(string memory str) internal pure returns (uint256) {
+        bytes memory b = bytes(str);
+        uint256 result = 0;
+        for (uint i = 0; i < b.length; i++) {
+            uint8 c = uint8(b[i]);
+            if (c >= 48 && c <= 57) {
+                result = result * 10 + (c - 48);
+            }
+        }
+        return result;
+    }
+
     function main(
         UnverifiedEmail calldata unverifiedEmail
-    ) public returns (Proof memory, string memory, string memory) {
+    ) public returns (Proof memory, string memory, uint256, string memory) {
         VerifiedEmail memory email = unverifiedEmail.verify();
 
-        // Hi, Qinghao. Your Credit is 80!
+        // 从 subject 中捕获信息
         string[] memory captures = email.subject.capture(
-            "^Hi, ([^.]+). Your Credit is ([0-9]{2})!$"
-        );
-        
-        require(
-            captures.length == 3,
-            "subject must match the expected pattern"
+            "^Hi, [^(]+ \\(([^)]+)\\). Your Credit is ([0-9]+) in ([^!]+)!$"
         );
 
-        return (proof(), captures[1], captures[2]);
+        require(captures.length == 4, "Invalid subject format");
+
+        return (
+            proof(),
+            captures[1], // email
+            _parseUint(captures[2]), // credit
+            captures[3] // bank name
+        );
     }
 }

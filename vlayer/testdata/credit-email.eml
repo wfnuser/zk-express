@@ -1,85 +1,85 @@
 Delivered-To: accordingworktest@gmail.com
-Received: by 2002:a05:6124:2a52:b0:3ca:93e2:4752 with SMTP id cd18csp1626843vlb;
-        Sat, 16 Nov 2024 02:41:40 -0800 (PST)
-X-Received: by 2002:a05:6808:7cc:b0:3e7:bd23:78e5 with SMTP id 5614622812f47-3e7bd237b91mr2245367b6e.7.1731753700699;
-        Sat, 16 Nov 2024 02:41:40 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1731753700; cv=none;
+Received: by 2002:a05:6124:2a52:b0:3ca:93e2:4752 with SMTP id cd18csp1705502vlb;
+        Sat, 16 Nov 2024 05:45:21 -0800 (PST)
+X-Received: by 2002:a05:6830:630e:b0:718:5a53:cc61 with SMTP id 46e09a7af769-71a77a2dab6mr5235283a34.30.1731764721288;
+        Sat, 16 Nov 2024 05:45:21 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1731764721; cv=none;
         d=google.com; s=arc-20240605;
-        b=PDdIaj5+U1/KorcCt9cqbpNRDYAjYNqrqxYrJ7HMnrmALZQtvhnlM18EpTo2jupWcy
-         MsQfsmz13+qEguk+C4Fr9xLhexyAxYP/n9wQ3IZlc1YtaI3+52ZDeNAuy2OeGwjpVgWm
-         /szGuRxGf3icZAgwysHYjWHfwksxhCXiSEUVz77nl3viVHnHggmhJw7mWptf5ltg4e4L
-         MR4bMDvCfpndpg+LucLogLYwlC33gfjE+9/RRJrB7hFUqmGz54U5WatJBEhLzsT5kKy8
-         1JQ+ju8gsSmcWGv/r7qXZ1hmHOsel3F1zvqdOrw4Ay6qHLnNMe5FMPHCuPqhTa/2gnSb
-         fdrA==
+        b=ECH1l4LW9vcHvPqIGovEwMJPCGZRnUwjchd2xynLWJjca9bsH0N0bqS0bUtFpXHfyr
+         bSO2XMCV8mEp1j5K1D/lB+DLr2UTLZrIn2liZZNq/nnSFO9rr54U/6FrcdGJFQZ/c93A
+         JuEWnRZwZFOAkg4lTy1iWjyiuEQsJDOT5Iet0lB7lI8bX2H4fbSYnPkS68aIErslZLfd
+         YUGjmS62GmAvIPl394axmjnc+zG+SIYxoAipkdcu3JYAEGPr4GBmh/P/avECIUm6CUvH
+         GDwRYIEM1i1hrb2mxKhMPOEfGiwotVf3sdDY/gfyPlQDJJZymxzJRnTMom15QsF9B9Bg
+         NuXw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=to:subject:message-id:date:from:mime-version:dkim-signature;
-        bh=ev/sWsxcJOsCGwqZKUsDV5GNNjetfMfd86a7KltEa+Q=;
+        bh=M7cfVfSpkgHqmFHFAXjAiwrMBR7b+puipEUpz1VsmcI=;
         fh=YLY0e6trwlDaqSNiLueXLOUE8ad9YKDJXKiMgWwniRY=;
-        b=LtKvXKnwgq4eky/dtUdE5QJ7yA2XZCnlCqJtiL87/sVkta+MK0paJvihL3bkgVqXeJ
-         zFOw747yvRWtCeWJ9DbXfOe5JWsfZo727X3ox5J6Y96GwsuR8S0SsPLow+poHLBbz+Lu
-         uOq4A0tNPaYJj3AYPaReOgSGLQkL98mNMtDzqqH2iFVKuyurTKSaMbkKK0cYsMwcTJu+
-         YBlvQsgTgvEBtkaKdRdOY7m+iiOp/fc/7qvxrXKvCwzXKBQNtXmQFp6AeyvNHDfW+s1u
-         sQq5bwLOTX/plcCNeceDapFHAoXvsna8ZLWYn1Q+/4GrIh8Xc2m/7r6Ol9izwSPJ1Y4I
-         XCVw==;
+        b=bu7chPuYSuM2X1W7YaHEm8qjFt1CWcXP68p2hCOaryfsaofQptDyZjZmSP8e+rq1nY
+         QlAseW5uiq/gt4MUzfLD5OZDfPzPJ/qythGdI5iCe+AfduIB7UOCLYVTzbh8xyDrJSr0
+         kHPSV5dMUDSfgolxCrDVQ1tGg/yswpp/rwWctzBGepqovHV0IoYusk3jgZ7oNuNLd0Hf
+         zpuQT8HwuGXnm1YAYaPdfrtk3LVXyLd3amUM8wqa+RQlyW+a7PDdYe++ap0Vy1Yq4FDz
+         CMKar1VKfkC8CVllUzIxisTgIfXYjPj2iB3DiJvp/Lf7LQGaopuMTxGuQfl77iKmosLt
+         T5nQ==;
         dara=google.com
 ARC-Authentication-Results: i=1; mx.google.com;
-       dkim=pass header.i=@gmail.com header.s=20230601 header.b=k+zogRuH;
+       dkim=pass header.i=@gmail.com header.s=20230601 header.b="gHv/YSe4";
        spf=pass (google.com: domain of youbetdao@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=youbetdao@gmail.com;
        dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com;
        dara=pass header.i=@gmail.com
 Return-Path: <youbetdao@gmail.com>
 Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
-        by mx.google.com with SMTPS id 5614622812f47-3e7b84fc23fsor2327680b6e.0.2024.11.16.02.41.40
+        by mx.google.com with SMTPS id 46e09a7af769-71a6eabb474sor2177644a34.1.2024.11.16.05.45.21
         for <accordingworktest@gmail.com>
         (Google Transport Security);
-        Sat, 16 Nov 2024 02:41:40 -0800 (PST)
+        Sat, 16 Nov 2024 05:45:21 -0800 (PST)
 Received-SPF: pass (google.com: domain of youbetdao@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
 Authentication-Results: mx.google.com;
-       dkim=pass header.i=@gmail.com header.s=20230601 header.b=k+zogRuH;
+       dkim=pass header.i=@gmail.com header.s=20230601 header.b="gHv/YSe4";
        spf=pass (google.com: domain of youbetdao@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=youbetdao@gmail.com;
        dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com;
        dara=pass header.i=@gmail.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1731753700; x=1732358500; dara=google.com;
+        d=gmail.com; s=20230601; t=1731764720; x=1732369520; dara=google.com;
         h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
          :date:message-id:reply-to;
-        bh=ev/sWsxcJOsCGwqZKUsDV5GNNjetfMfd86a7KltEa+Q=;
-        b=k+zogRuHfM8Eq4Tj703VnswUuphxs0wuhxh0K5/vI2hT9aSiw3Iir0KoZrFIBEse6t
-         L7ka+4NvW1+jT929lQ+Z4qECFeaO5jiREE/Nscs63nd/erbQ6ohD8M1BrZAaD78e8vdK
-         mSufr+hiHx5kxkbLVVs8JtpwaaCdXE7bjRDkQCt3Vr+QbKrVMApRH/dkB5r0TBOFKHM3
-         8X3ObKlM5iyZp+3zsZqa1zZ2AdD6MCV6p6aRcsEVBELeFZ4I+P5eqFH6enuitLRhj3x4
-         IBTGa95LKLJI/9W16XRnm7luz2F53Vjy+PYAeehIL2V7qPzJFAz0ofJuucYf2VZKnZG8
-         IBbA==
+        bh=M7cfVfSpkgHqmFHFAXjAiwrMBR7b+puipEUpz1VsmcI=;
+        b=gHv/YSe4J8prjYZogjZ0MJc3fxDLVfgbjvaGB68QhYA00RxX7Qrl2Mqtb8dVfOPQaJ
+         xbMvbw9DCESr7Vc63wQCGJTT4tDGt7mrIujuWrdeJL33cb8bBPF/7ccIsw1/7L0GtQ5v
+         c4AzVTm6ClicOzJxjHYHZSKDWpIiaS0kwMuVOOA3U9IjWf+0XnMn4Sy9TFEI0X/hrnLH
+         bkpVXaIapFhDTiS8br4NRMTSzFhW5lSSKGTdWH0gTClAONpDBa+2DLr+68b4yi3EO9mN
+         FT/iDopTPQeJ4t0lXBdxuQd0bNTY+bc5S2lvStYTPeHN7TzlpElP5HggVEYigivus+0P
+         QswA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731753700; x=1732358500;
+        d=1e100.net; s=20230601; t=1731764720; x=1732369520;
         h=to:subject:message-id:date:from:mime-version:x-gm-message-state
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=ev/sWsxcJOsCGwqZKUsDV5GNNjetfMfd86a7KltEa+Q=;
-        b=Cp9BwjQbCg6MfG84URAV2On6UcGkER/LHP1h0hF9yoG59pDEbVa+nRw2dsJnuJHeZn
-         a3d6ei85LQ/N6LS9Z4/tbfgXJfGxlr1KlJIYrRorhZyoDioS0Xtcjb7GmpFAoFr0KoBL
-         1w6telsrbkioqiwZjEjMMQWKF/hfhjHftVxGcIVFPGrrFXemnsirRUUlaKmz6nVR8+Tc
-         5Ah/Q8wl9JHXEew9l/yVI0d3UOLyEViSQjFVrDV4xz0z6/iS6YuLYTucJ0aYOjYonlBi
-         E66iS5g8PcCArA71perqVXDENEWss5tfWLs6amntNTqjdLVPJLuoGtfAwqpuVnHTr423
-         2RZQ==
-X-Gm-Message-State: AOJu0YyVof4fdCK2ACCD3LYxfKdSdJz8SKSeI2yNYjjG5yHCz34KQSMq dHzHVZTjcUONI3MdzbetVvSzw25VyrBEwwqeqjown4IsmNt8KGz7L6TtynluQMvVI/xat3ql1ZV ouKxD7CQmp/tb9p/rco4DvuViFp6j1Q==
-X-Google-Smtp-Source: AGHT+IE8PjVosHMoq60taUsXmTEWWXUdGKBKekMXq3jfiqWqyTZut+sFhJEngxkIO9w/DfytDLJx5r/AXnX4Slgemv0=
-X-Received: by 2002:a05:6830:6e10:b0:715:3a11:ece9 with SMTP id 46e09a7af769-71a77a24762mr5174842a34.19.1731753700181; Sat, 16 Nov 2024 02:41:40 -0800 (PST)
+        bh=M7cfVfSpkgHqmFHFAXjAiwrMBR7b+puipEUpz1VsmcI=;
+        b=S2vVm92bkMQcFJB9cnfjak4C9vYp7Tk86GUeWqkAspGbo2ZFO/OD3SA1DeIVvrN59P
+         dZvkNMoaFx6U3FJH924MwSsGupnbAOhTJfboABqhL5iJk5GAAKVAyUK+4rsmzLywZJsa
+         GW1B4ipdseJenF75QzvWkQKlGVZ305JaS6Zl7e83DU0SdQzV+rJwrd3rcxt/upW/XUkD
+         qiUPN07jiIQkqYSv4H8NFLGxr89fwF98ziflPcVZi5zsO5VBLyoFbd+4wFuQZ8gDEHKi
+         Upg6LxeA5r/m/WThVAhj0Ir7aMCw72ej84sjSupCiMBAQayEniWeaNzVNRbrX4DwzmTC
+         SRRg==
+X-Gm-Message-State: AOJu0Yzr7ozeE3fEOIVbgkS9Peu6mUCZyHu1staR/EKRl0ovXrTCVjlI rvs8Xk2jX7uWw9JvzwzYsSbaGjUS2SWVyRfyLVOUaavWJgln1r9Z1Ec3bdWiQKnI4/dnUb/jwHr pM7VY2CHI/HC8ONnucJhIl1ySAbVceQ==
+X-Google-Smtp-Source: AGHT+IF4/bPWaJJq2XRXe+sHwfcmnlGYq5UW9nj5O04rIjB1gSMZoY7MDycn95qDKNWfCpouTO/LjX31bgw/EyjCiIQ=
+X-Received: by 2002:a05:6830:6101:b0:718:15a9:505f with SMTP id 46e09a7af769-71a779470c1mr6153784a34.14.1731764720664; Sat, 16 Nov 2024 05:45:20 -0800 (PST)
 MIME-Version: 1.0
 From: YoubetDAO <youbetdao@gmail.com>
-Date: Sat, 16 Nov 2024 17:41:28 +0700
-Message-ID: <CALHPRxrhSvA6aK2M3sieVh5-M7Zz=Oobh=PhvBj-3HMQq2ZpvQ@mail.gmail.com>
-Subject: Hi, Qinghao. Your Credit is 80!
+Date: Sat, 16 Nov 2024 20:45:09 +0700
+Message-ID: <CALHPRxrw=ybth4qwyz_+2gox1M4gxM-ANyMsTZiVDpXhEjeOsQ@mail.gmail.com>
+Subject: Hi, Qinghao (qinghao@ethglobal.com). Your Credit is 80 in ETH Bank!
 To: accordingworktest@gmail.com
-Content-Type: multipart/alternative; boundary="00000000000023503b062705547c"
+Content-Type: multipart/alternative; boundary="0000000000000288c0062707e545"
 
---00000000000023503b062705547c
+--0000000000000288c0062707e545
 Content-Type: text/plain; charset="UTF-8"
 
 
 
---00000000000023503b062705547c
+--0000000000000288c0062707e545
 Content-Type: text/html; charset="UTF-8"
 
 <div dir="ltr"><br></div>
 
---00000000000023503b062705547c--
+--0000000000000288c0062707e545--

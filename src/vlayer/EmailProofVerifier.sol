@@ -8,34 +8,35 @@ import {Verifier} from "vlayer-0.1.0/Verifier.sol";
 
 contract EmailProofVerifier is Verifier {
     address public prover;
-    mapping(string => uint256) public credits;
+    mapping(string => string[]) public userBanks;
+    mapping(string => uint256[]) public userCredits;
 
     constructor(address _prover) {
         prover = _prover;
     }
 
-    function _parseUint(string memory str) internal pure returns (uint256) {
-        bytes memory b = bytes(str);
-        uint256 result = 0;
-        for (uint i = 0; i < b.length; i++) {
-            uint8 c = uint8(b[i]);
-            if (c >= 48 && c <= 57) {
-                result = result * 10 + (c - 48);
-            }
-        }
-        return result;
-    }
-
     function verify(
         Proof calldata,
-        string memory username,
-        string memory credit
+        string memory userEmail,
+        uint256 creditValue,
+        string memory bankName
     ) public onlyVerified(prover, EmailProver.main.selector) {
-        uint256 amount = _parseUint(credit);
-        credits[username] = amount;
+        for (uint i = 0; i < userBanks[userEmail].length; i++) {
+            if (
+                keccak256(bytes(userBanks[userEmail][i])) ==
+                keccak256(bytes(bankName))
+            ) {
+                userCredits[userEmail][i] = creditValue;
+                return;
+            }
+        }
+        userBanks[userEmail].push(bankName);
+        userCredits[userEmail].push(creditValue);
     }
 
-    function getCredit(string memory username) public view returns (uint256) {
-        return credits[username];
+    function getUserCredits(
+        string memory userEmail
+    ) public view returns (string[] memory banks, uint256[] memory credits) {
+        return (userBanks[userEmail], userCredits[userEmail]);
     }
 }

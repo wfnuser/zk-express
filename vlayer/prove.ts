@@ -37,8 +37,9 @@ const hash = await vlayer.prove({
 console.log("Proof hash:", hash);
 const result = await vlayer.waitForProvingResult(hash);
 console.log("Proof:", result[0]);
-console.log("Name:", result[1]);
+console.log("Email:", result[1]);
 console.log("Credit:", result[2]);
+console.log("BankName:", result[3]);
 console.log("Verifying...");
 
 // use ethClient to get event from prover
@@ -67,6 +68,7 @@ const txHash = await ethClient.writeContract({
   address: verifier,
   abi: verifierSpec.abi,
   functionName: "verify",
+  // args: [result[0], "qinghao@ethglobal.com", 80n, "ETH Bank"],
   args: result,
   chain,
   account: account,
@@ -79,13 +81,13 @@ await ethClient.waitForTransactionReceipt({
   retryDelay: 1000,
 });
 
-const credit = await ethClient.readContract({
+const credits = await ethClient.readContract({
   address: verifier,
   abi: verifierSpec.abi,
-  functionName: "getCredit",
-  args: ["wfnuser@hotmail.com"],
+  functionName: "getUserCredits",
+  args: ["qinghao@ethglobal.com"],
 });
 
-console.log("Get Credit From Verifier:", credit);
+console.log("Get Credit From Verifier:", credits);
 
 console.log("Verified!");
